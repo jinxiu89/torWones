@@ -6,19 +6,45 @@ import os
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(__file__)
-options = {
-    'port': 8000
+option = {
+    'port': 8000,
+    'log_path':os.path.join(BASE_DIR,"logs/log.txt"),
+    'log_level':"debug" # debug|info|warning|error|none
 }
 setting = {
-    "debug": True
+    "debug": True,
+    "static_path":os.path.join(BASE_DIR,"static"),
+    "template_path":os.path.join(BASE_DIR,"templates"),
+    "xsrf_cookies":True,
+    "cookie_secret":"",
+    "login_url":"/passport/account/login/",
+    "ui_methods":{
+        "get_flashed_message":""
+    },
+    "pycket":{
+        "engine":"redis",
+        "storage":{
+            "host":"localhost",
+            "port":6379,
+            "db_sessions":5,
+            "db_notifications":11,
+            "max_connections":2**31,
+        },
+        "cookies":{
+            "expires_days":30,
+        }
+    }
 }
 config = {
     "version": "0.0.1",
+    "Copyright":"Copyright © {} {} All Rights Reserved. ".format(datetime.now().strftime("%Y"), "www.motkit.com"),
+    "stack":"Tornado",
+    "object":"TorWones"
 }
 db = {
     "host": "127.0.0.1",
     "user": "root",
     "password": "Wavlink@163",
-    "database": "wones",
+    "database": "wones", # your dataBase
     "port": "3306"
 }
