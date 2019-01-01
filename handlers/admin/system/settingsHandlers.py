@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-# _*_coding:utf-8_*_
-# author:Jinxiu89@163.com
-# create by kevin on {18-12-29}.
+# _*_ coding:utf-8_*_
+# author:jinxiu89@163.com
+# create by thomas on 18-12-31.
 from handlers.base import BaseHandler
 
 
 class IndexHandler(BaseHandler):
     def get(self, *args, **kwargs):
-        self.write("hello account Handlers")
+        self.write("hello system setting index")
