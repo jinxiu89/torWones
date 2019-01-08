@@ -5,8 +5,10 @@
 from handlers.passport import passportUrl
 from handlers.admin import adminUrls
 from handlers.utils import utilsUrl
+from handlers.base import NotFoundHandler
 
 handlers = []
 handlers += passportUrl
 handlers += adminUrls
 handlers += utilsUrl
+handlers.append((r'.*', NotFoundHandler))
