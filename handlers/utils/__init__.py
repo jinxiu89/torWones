@@ -5,6 +5,5 @@
 from handlers.utils import captcha
 
 utilsUrl = [
-    (r'/utils/captcha', captcha.CaptchaHandler),
-    (r'/utils/captcha/', captcha.CaptchaHandler)
+    (r'/utils/captcha/(?P<code>.+)', captcha.CaptchaHandler),
 ]
