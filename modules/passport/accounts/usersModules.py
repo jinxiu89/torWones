@@ -2,10 +2,6 @@
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
 # create by thomas on 18-12-31.
-#!/usr/bin/env python
-# _*_ coding:utf-8_*_
-# author:jinxiu89@163.com
-# create by thomas on 18-11-3.
 from uuid import uuid4
 from datetime import datetime
 import pbkdf2
