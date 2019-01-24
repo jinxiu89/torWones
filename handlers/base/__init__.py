@@ -4,7 +4,7 @@
 # create by kevin on {18-12-29}.
 import json
 from tornado.web import RequestHandler
-from libs.dataBase  import db, redis
+from libs.dataBase import db, redis
 from config import config
 
 
@@ -37,3 +37,9 @@ class NotFoundHandler(BaseHandler):
     def get(self, *args, **kwargs):
         self.render("base/404.html")
         self.set_status(404, "error page is not found")
+
+
+class InternalErrorHandler(BaseHandler):
+    def get(self, *args, **kwargs):
+        self.render("base/500.html")
+        self.set_status(500, "Internal error")
