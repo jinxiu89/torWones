@@ -7,4 +7,4 @@ from handlers.base import BaseHandler
 
 class IndexHandler(BaseHandler):
     def get(self, *args, **kwargs):
-        self.write("hello admin index")
+        self.render("dashboard/index.html")
