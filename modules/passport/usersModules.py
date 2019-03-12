@@ -142,4 +142,3 @@ class User(Base):
             'name': self.name,
             'last_login': self.last_login
         }
-

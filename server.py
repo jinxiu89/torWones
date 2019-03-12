@@ -9,8 +9,8 @@ from application import Application
 
 
 def main():
-    tornado.options.options.log_file_prefix=option['log_path']
-    tornado.options.options.logging=option['log_level']
+    tornado.options.options.log_file_prefix = option['log_path']
+    tornado.options.options.logging = option['log_level']
     tornado.options.parse_command_line()
     app = Application()
     app.listen(option['port'])

@@ -6,9 +6,10 @@ import json
 from tornado.web import RequestHandler
 from libs.dataBase import db, redis
 from config import config
+from pycket.session import SessionMixin
 
 
-class BaseHandler(RequestHandler):
+class BaseHandler(RequestHandler, SessionMixin):
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
         self.db = db.dbSession

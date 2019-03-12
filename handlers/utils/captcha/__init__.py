@@ -7,7 +7,7 @@ from libs.captcha import capthca
 
 
 class CaptchaHandler(BaseHandler):
-    def get(self,code):
+    def get(self, code):
         img = capthca.create_captcha(self)
         self.set_header('Content-Type', 'image/jpg')
         self.write(img)
