@@ -19,11 +19,11 @@ class LoginHandler(BaseHandler):
         pass
 
     def get(self, *args, **kwargs):
-        next = self.get_argument('next', '/')
+        next_url = self.get_argument('next', '/')
         kwargs = {
             "msg": "用户登陆",
             "form": login.LoginForm(),
-            "next": next
+            "next_url": next_url
         }
         self.render('passport/accounts/auth/login.html', **kwargs)
 
