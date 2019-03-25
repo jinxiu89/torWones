@@ -12,4 +12,5 @@ passportUrl = [
     (r'/passport/account/', accountHandlers.IndexHandler),
     (r'/passport/account/auth', authHandlers.AuthHandler),
     (r'/passport/account/login', authHandlers.LoginHandler),
+    (r'/passport/account/signUp', authHandlers.SignUpHandler)
 ]

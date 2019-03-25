@@ -8,18 +8,18 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="/static/admin/lib/html5shiv.js"></script>
-    <script type="text/javascript" src="/static/admin/lib/respond.min.js"></script>
+    <script type="text/javascript" src="/static/libs/html5shiv.js"></script>
+    <script type="text/javascript" src="/static/libs/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="/static/admin/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/plugins/hui/h-ui/css/H-ui.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="/static/admin/h-ui.admin/css/H-ui.login.css"/>
+          href="/static/plugins/hui/h-ui.admin/css/H-ui.login.css"/>
     <link rel="stylesheet" type="text/css"
-          href="/static/admin/h-ui.admin/css/style.css"/>
+          href="/static/plugins/hui/h-ui.admin/css/style.css"/>
     <link rel="stylesheet" type="text/css"
-          href="/static/admin/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+          href="/static/libs/Hui-iconfont/1.0.9/iconfont.css"/>
     <!--[if IE 6]>
-    <script type="text/javascript" src="/static/admin/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="/static/libs/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>{{ msg }} - {{ handler.config['object'] }}-{{ handler.config["version"] }}</title>
@@ -46,6 +46,12 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+                <div class="formControls col-xs-5">
+                    {{ form.confirmation }}
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe720;</i></label>
                 <div class="formControls col-xs-3">
                     {{ form.captcha }}
@@ -57,7 +63,8 @@
             <div class="row cl">
                 <div class="formControls col-xs-5 col-xs-offset-3">
                     {% module xsrf_form_html() %}
-                    <input class="btn btn-success radius size-L button" id="submit" name="submit" type="button" value="       注    册     ">
+                    <input class="btn btn-success radius size-L button" id="submit" name="submit" type="button"
+                           value="       注    册     ">
                     <input name="" type="reset" class="btn btn-default radius size-L"
                            value="取&nbsp;&nbsp;消">
                 </div>
@@ -66,16 +73,16 @@
     </div>
 </div>
 <div class="footer" style="font-size: 14px;">{{ handler.config['Copyright'] }} - {{ handler.config['stack'] }}</div>
-<script type="text/javascript" src="/static/admin/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="/static/admin/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="/static/admin/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="/static/admin/h-ui.admin/js/dialog.js"></script>
-<script type="text/javascript" src="/static/common/js/commons.js"></script>
+<script type="text/javascript" src="/static/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/libs/layer/3.1.1/layer.js"></script>
+<script type="text/javascript" src="/static/plugins/hui/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="/static/plugins/hui/h-ui.admin/js/dialog.js"></script>
+<script type="text/javascript" src="/static/libs/js/commons.js"></script>
 <script>
     //    生成验证码
     function get_image_code() {
         var d = Math.round(new Date().getTime() / 1000);
-        $(".get_image_code").attr("src", "/captcha/" + d);
+        $(".get_image_code").attr("src", "/utils/captcha/" + d);
     }
 
     $(document).ready(function () {
@@ -88,7 +95,7 @@
             postData[this.name] = this.value;
         });
         $.ajax({
-            url: "/account/signup",
+            url: "/passport/account/signUp",
             type: "post",
             data: JSON.stringify(postData),
             'headers': {
@@ -98,11 +105,10 @@
                 if (result.status === true) {
                     layer.msg(result.message, {icon: 1, time: 1000});
                     setTimeout(function () {
-                        window.location = "/account/login";
+                        window.location = result.url;
                     }, 1000)
                 } else {
                     layer.msg(result.message, {icon: 5, time: 2000})
-
                 }
             }
         });

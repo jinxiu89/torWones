@@ -3,10 +3,12 @@
 # author:Jinxiu89@163.com
 # create by kevin on {18-12-29}.
 import json
-from tornado.web import RequestHandler
-from libs.dataBase import db, redis
-from config import config
+
 from pycket.session import SessionMixin
+from tornado.web import RequestHandler
+
+from config import config
+from libs.dataBase import db, redis
 
 
 class BaseHandler(RequestHandler, SessionMixin):

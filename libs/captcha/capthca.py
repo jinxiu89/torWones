@@ -29,7 +29,6 @@ def create_captcha(self):
     return img
 
 
-
 def auth_captcha(self, captcha_code):
     """
     验证redis中的验证码和用户输入的验证码是否一致，redis中存储的value 取出来时byte类型的，所以用

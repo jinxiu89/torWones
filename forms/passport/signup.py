@@ -1,25 +1,20 @@
 #!/usr/bin/env python
-# _*_ coding:utf-8_*_
-# author:jinxiu89@163.com
-# create by thomas on 18-11-1.
+# _*_coding:utf-8_*_
+# author:Jinxiu89@163.com
+# create by kevin on {19-3-20}.
 import wtforms
 import wtforms_json
 from wtforms.validators import (DataRequired, Length, EqualTo, Email, ValidationError)
 from wtforms_tornado import Form
-from modules.passport.usersModules import User
 from libs.dataBase.redis import redis
-from modules.passport.localOAuthModules import LocalOAuth
+from modules.passport.usersModules import User
 
 
-class LoginForm(Form):
-    """
-    wtforms_json 是用于Json数据格式的验证引入的。
-    1、在有JSON数据的Form 里init()它，即可解决JSON数据无法通过验证的问题
-    """
+class SignUpForm(Form):
     wtforms_json.init()
     name = wtforms.StringField(
         label="用户名",
-        validators=[DataRequired("请输入用户名"), Length(4, 16, message="长度必须在4-16个字符之间")],
+        validators=[DataRequired("请输入用户名"), ],
         description="用户名",
         render_kw={
             "id": "name",
@@ -36,11 +31,11 @@ class LoginForm(Form):
         :param field:
         :return:
         """
-        if User.by_name(field.data) is None:
-            raise ValidationError("用户没注册")
+        if User.by_name(field.data) is not None:
+            raise ValidationError("该用户已经有人注册")
 
     password = wtforms.StringField(
-        label="管理员密码",
+        label="密码",
         validators=[DataRequired("请输入密码")],
         description="密码",
         render_kw={
@@ -51,12 +46,18 @@ class LoginForm(Form):
             "placeholder": "密码"
         }
     )
-
-    @staticmethod
-    def validate_password(self, password):
-
-        pass
-
+    confirmation = wtforms.StringField(
+        label="确认密码",
+        validators=[DataRequired("请重输密码"), EqualTo("password", message="两次密码输入不一致")],
+        description="重复输入密码",
+        render_kw={
+            "type": "password",
+            "class": "input-text size-L",
+            "id": "password",
+            "autocomplete": "off",
+            "placeholder": "密码"
+        }
+    )
     captcha = wtforms.StringField(
         validators=[DataRequired("请输入验证码")],
         description="验证码",
@@ -81,9 +82,3 @@ class LoginForm(Form):
             raise ValidationError("验证码不合法！")
         elif str(redis.get('captcha'), encoding='utf-8').lower() != field.data.lower():
             raise ValidationError('验证码不正确！')
-
-    submit = wtforms.SubmitField(
-        render_kw={
-            "class": "btn btn-success radius size-L button", "value": "       登      录     ",
-            "type": "button"
-        })

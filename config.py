@@ -14,10 +14,11 @@ option = {
 setting = {
     "debug": True,
     "static_path": os.path.join(BASE_DIR, "static"),
+    "avatar_path": os.path.join(BASE_DIR, 'static/images/user_avatars/'),
     "template_path": os.path.join(BASE_DIR, "templates"),
     "xsrf_cookies": True,
-    "cookie_secret": "",
-    "login_url": "/passport/account/login/",
+    "cookie_secret": "db7ef65f-3bb0-4d19-9966-d07fafb3cd8a",
+    "login_url": "/passport/account/login",
     "ui_methods": {
         "get_flashed_message": ""
     },
@@ -33,7 +34,8 @@ setting = {
         "cookies": {
             "expires_days": 30,
         }
-    }
+    },
+    "image_type": ['png', 'jpeg', 'jpg', 'gif', 'bmp']
 }
 config = {
     "version": "0.0.1",
