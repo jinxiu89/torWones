@@ -19,9 +19,11 @@ class LoginHandler(BaseHandler):
         pass
 
     def get(self, *args, **kwargs):
+        next = self.get_argument('next', '/')
         kwargs = {
             "msg": "用户登陆",
-            "form": login.LoginForm()
+            "form": login.LoginForm(),
+            "next": next
         }
         self.render('passport/accounts/auth/login.html', **kwargs)
 
@@ -41,7 +43,7 @@ class LoginHandler(BaseHandler):
             if result['status'] is False:
                 return self.write({"status": False, "message": result['msg']})
             else:
-                return self.write({"status": True, "message": result['msg'], "url": "/passport/account/login"})
+                return self.write({"status": True, "message": result['msg'], "url": self.get_argument('next', '/')})
         else:
             for key in form.errors:
                 return self.write({"status": False, "message": str(form.errors[key])})

@@ -88,7 +88,7 @@
             postData[this.name] = this.value;
         });
         $.ajax({
-            url: "/passport/account/login",
+            url: "/passport/account/login?next={{ next }}",
             type: "post",
             data: JSON.stringify(postData),
             'headers': {
