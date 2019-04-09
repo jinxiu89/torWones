@@ -7,6 +7,8 @@ from handlers.base import BaseHandler
 from libs.captcha.capthca import auth_captcha
 from libs.passport.auth import sign_in, sign_up
 from forms.passport import (login, signup)
+from tornado.web import authenticated
+from config import setting
 
 
 class AuthHandler(BaseHandler):
@@ -19,13 +21,16 @@ class LoginHandler(BaseHandler):
         pass
 
     def get(self, *args, **kwargs):
-        next_url = self.get_argument('next', '/')
-        kwargs = {
-            "msg": "用户登陆",
-            "form": login.LoginForm(),
-            "next_url": next_url
-        }
-        self.render('passport/accounts/auth/login.html', **kwargs)
+        next_url = self.get_argument('next', '/admin/index')
+        if self.get_current_user():
+            return self.redirect("/admin/index")
+        else:
+            kwargs = {
+                "msg": "用户登陆",
+                "form": login.LoginForm(),
+                "next_url": next_url
+            }
+            self.render('passport/accounts/auth/login.html', **kwargs)
 
     def post(self, *args, **kwargs):
         """
@@ -43,7 +48,8 @@ class LoginHandler(BaseHandler):
             if result['status'] is False:
                 return self.write({"status": False, "message": result['msg']})
             else:
-                return self.write({"status": True, "message": result['msg'], "url": self.get_argument('next', '/')})
+                return self.write(
+                    {"status": True, "message": result['msg'], "url": self.get_argument('next', '/admin/index')})
         else:
             for key in form.errors:
                 return self.write({"status": False, "message": str(form.errors[key])})
@@ -72,3 +78,12 @@ class SignUpHandler(BaseHandler):
         else:
             for key in form.errors:
                 return self.write({"status": False, "message": str(form.errors[key])})
+
+
+class SignOutHandler(BaseHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        self.session.delete('user_name')
+        self.redirect(setting['login_url'])

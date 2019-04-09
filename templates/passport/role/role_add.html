@@ -1,0 +1,70 @@
+{%extends ../../base/add.html%}
+{% block header %}
+<title>添加新角色</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+{% end %}
+{% block article %}
+<article class="clearfix pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+        {% autoescape None %}
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>{{ form.name.label }}</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                {{ form.name }}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">{{ form.description.label }}</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                {{ form.description }}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {% module xsrf_form_html() %}
+                {{ form.submit }}
+            </div>
+        </div>
+    </form>
+</article>
+{% end %}
+{% block javascript %}
+<!--<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>-->
+<!--<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>-->
+<!--<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>-->
+<script type="text/javascript" src="/static/libs/js/commons.js"></script>
+<!--外部引入JS插件-->
+{% block js %}
+<script type="text/javascript">
+    $(".button").click(function () {
+        var postData = {};
+        var data = $("form").serializeArray();
+        $.each(data, function () {
+            postData[this.name] = this.value
+        });
+        $.ajax({
+            "url":"/passport/add_role",
+            "type":"post",
+            data: JSON.stringify(postData),
+            'headers': {
+                'X-XSRFTOKEN': get_cookie("_xsrf")
+            },
+            'success': function (result) {
+                if (result.status === true) {
+                    layer.msg(result.message, {icon: 1, time: 1000});
+                    setTimeout(function () {
+                        window.close();
+                        window.parent.location = result.url;
+                    }, 1000)
+                } else {
+                    layer.msg(result.message, {icon: 5, time: 2000})
+                }
+            }
+        });
+    });
+</script>
+<!--JS业务-->
+{% end %}
+{% end %}
+

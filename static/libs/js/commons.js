@@ -33,11 +33,11 @@ $("#button_add").click(function () {
     //noinspection JSUnresolvedFunction
     $.post(url,postData,function (result) {
         //r如果返回结果是0 表示失败了
-        if(result.status == 0){
+        if(result.status === 0){
             dialog.error(result.message);
         }
         // 如果返回结果为1 则表示成功
-        if(result.status == 1){
+        if(result.status === 1){
             dialog.success(result.message,result.jump_url);
         }
     },'JSON');

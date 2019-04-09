@@ -70,10 +70,9 @@ class SignUpForm(Form):
     )
 
     @staticmethod
-    def validate_captcha(self, field):
+    def validate_captcha(field):
         """
         通过Form自定义验证，作用是用于验证码校验
-        :param self:
         :param field:
         :return:
         """

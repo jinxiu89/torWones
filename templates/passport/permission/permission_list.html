@@ -1,0 +1,66 @@
+{% extends ../../base/parent.html%}
+{% block header %}
+<title>仪表板</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+{% end %}
+{% block nav %}
+<nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+    首页
+    <span class="c-gray en">/</span>
+    管理员管理
+    <span class="c-gray en">/</span>
+    管理员列表
+</nav>
+{% end %}
+{% block body %}
+<article class="Hui-admin-content clearfix">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="clearfix">
+						<span class="f-l">
+							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
+                                    class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+							<a class="btn btn-primary radius" href="javascript:void(0);"
+                               onclick="admin_role_add('添加权限','/passport/add_role')"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
+						</span>
+                <span class="f-r">共有数据：<strong></strong> 条</span>
+            </div>
+            <div class="mt-20 clearfix">
+                <table class="table table-border table-bordered table-hover table-bg">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="6">角色管理</th>
+                    </tr>
+                    <tr class="text-c">
+                        <th width="25"><input type="checkbox" value="" name=""></th>
+                        <th width="40">ID</th>
+                        <th width="100">角色名</th>
+                        <th class="text-l">描述</th>
+                        <th width="70">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</article>
+{% end %}
+{% block javascript %}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/libs/datatables/1.10.15/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/libs/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/static/plugins/hui/business/js/main.js"></script>
+<!--/请在上方写此页面业务相关的脚本-->
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#menu-admin dd").css("display", "block");
+        $("#menu-admin #permission").addClass("current");
+    });
+</script>
+{% end %}
+{% end %}

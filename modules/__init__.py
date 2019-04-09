@@ -3,5 +3,7 @@
 # author:Jinxiu89@163.com
 # create by kevin on {18-12-29}.
 from libs.dataBase.db import Base
-from .passport import (usersModules, localOAuthModules, foreignOauthModules)
+from .passport import (usersModules, rolesModules, localOAuthModules, foreignOauthModules)
+from .relationship import relationTableModules
+from .permission import permissionModules
 from .article import productModules

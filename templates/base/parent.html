@@ -62,7 +62,7 @@
                             <ul class="dropDown-menu menu radius box-shadow">
                                 <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
                                 <li><a href="#">切换账户</a></li>
-                                <li><a href="#">退出</a></li>
+                                <li><a href="/passport/account/signOut">退出</a></li>
                             </ul>
                         </li>
                         <li id="Hui-msg"><a href="#" title="消息"><span class="badge badge-danger">1</span><i
@@ -93,14 +93,21 @@
             资讯管理
             <span class="c-gray en">/</span>
             资讯列表
-             <span class="c-gray en">/</span>
+            <span class="c-gray en">/</span>
             hello
         </nav>
         {% end %}
         {% block body %}
         <!--业务内容-->
         {% end %}
-        <div class="footer">版权声明</div>
+        <div class="footer">
+            <p>
+                感谢jQuery、layer、laypage、Validform、UEditor、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
+                Copyright &copy;2015 h-ui.admin.pro v1.0 All Rights Reserved.<br> 本后台系统由<a href="http://www.h-ui.net/"
+                                                                                           target="_blank"
+                                                                                           title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持
+            </p>
+        </div>
     </div>
     <!--业务主体-->
 </section>

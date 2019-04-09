@@ -2,16 +2,17 @@
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
 # create by thomas on 18-12-31.
-from uuid import uuid4
 from datetime import datetime
-import pbkdf2
+from string import printable
+from uuid import uuid4
+
 from sqlalchemy import (Column, Integer, String, Boolean, DateTime)
 from sqlalchemy.orm import relationship, backref
-from modules.passport.localOAuthModules import LocalOAuth
-from libs.dataBase.db import Base, dbSession
-from utils.validate import validate
-from string import printable
+
 from config import setting
+from libs.dataBase.db import Base, dbSession
+from modules.relationship.relationTableModules import UserRole
+from utils.validate import validate
 
 
 class User(Base):
@@ -34,6 +35,7 @@ class User(Base):
     _is_delete = Column(Boolean, default=False, nullable=False)
     _avatar = Column(String(128))
     local_oauth = relationship('LocalOAuth', uselist=False)
+    roles = relationship('Role', secondary=UserRole.__tablename__, backref=backref("Users"))
 
     @classmethod
     def all(cls):

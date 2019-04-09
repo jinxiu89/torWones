@@ -5,12 +5,12 @@
         </a>
     </div>
     <div class="Hui-admin-menu-dropdown bk_2">
-        <dl id="dashboard" class="Hui-menu">
+        <dl id="menu-dashboard" class="Hui-menu">
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe625;</i>管理首页<i
                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="#">仪表盘</a></li>
+                    <li class="dashboard"><a href="/admin/index">仪表盘</a></li>
                     <li>
                         <dl class="Hui-menu">
                             <dt class="Hui-menu-title">统计报表<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i>
@@ -33,9 +33,9 @@
                 <i class="Hui-iconfont">&#xe64b;</i> 商品目录<i
                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i>
             </dt>
-            <dd class="Hui-menu-item" style="display: block;">
+            <dd class="Hui-menu-item">
                 <ul>
-                    <li class="current"><a href="#" title="商品分类"><i class="Hui-iconfont">&#xe6d7;</i>商品分类</a></li>
+                    <li ><a href="#" title="商品分类"><i class="Hui-iconfont">&#xe6d7;</i>商品分类</a></li>
                     <li>
                         <dl class="Hui-menu">
                             <dt class="Hui-menu-title">商品属性<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i>
@@ -97,8 +97,13 @@
                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="admin-role.html" title="角色管理">角色管理</a></li>
-                    <li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
+                    <li id="role"><a href="/passport/roles" title="角色管理">角色管理</a></li>
+                    <li id="permission-group">
+                        <a href="/passport/permissions_group" title="权限组管理">权限组管理</a>
+                    </li>
+                    <li id="permission">
+                        <a href="/passport/permissions" title="权限管理">权限管理</a>
+                    </li>
                     <li><a href="admin-list.html" title="管理员列表">管理员列表</a></li>
                 </ul>
             </dd>

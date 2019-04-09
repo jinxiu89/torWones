@@ -6,7 +6,7 @@ import json
 
 from pycket.session import SessionMixin
 from tornado.web import RequestHandler
-
+from modules.passport.usersModules import User
 from config import config
 from libs.dataBase import db, redis
 
@@ -23,11 +23,12 @@ class BaseHandler(RequestHandler, SessionMixin):
     def data_received(self, chunk):
         pass
 
-    # def get_current_user(self):
-    #     user_name = self.session.get("user_name")
-    #     user = None
-    #     if user_name:
-    #         pass
+    def get_current_user(self):
+        user_name = self.session.get("user_name")
+        user = None
+        if user_name:
+            user = User.by_name(name=user_name)
+        return user if user else None
 
     def on_finish(self):
         self.db.close()
