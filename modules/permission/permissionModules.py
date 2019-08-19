@@ -31,6 +31,10 @@ class PermissionGroup(Base):
         count = query.count()
         return data, count
 
+    @classmethod
+    def query(cls):
+        return dbSession.query(cls)
+
 
 class Permission(Base):
     """权限表"""
@@ -38,13 +42,11 @@ class Permission(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     group_id = Column(Integer, ForeignKey('tb_permission_group.id'))
     name = Column(String(64), nullable=False)
-    code = Column(String(50), nullable=False)
+    description = Column(String(64))
+    # 权限和菜单是一对一的关系
+    handler = Column(String(64), nullable=False)
     # 和角色是多对多关系
     role = relationship("Role", secondary=PermissionRole.__tablename__)
-    # 权限和菜单是一对一的关系
-    menu = relationship("Menu", backref=backref("Permission", uselist=False))
-    # 权限和handler是一对一的关系
-    handler = relationship("Handler", backref=backref("Permission", uselist=False))
 
     @classmethod
     def all(cls):
@@ -52,7 +54,10 @@ class Permission(Base):
         查询所有的数据，返回表数据
         :return: 列表
         """
-        return dbSession.query(cls).all()
+        query = dbSession.query(cls)
+        data = query.order_by(cls.group_id).all()
+        count = query.count()
+        return data, count
 
     @classmethod
     def by_id(cls, id):

@@ -1,6 +1,6 @@
 {%extends ../../base/add.html%}
 {% block header %}
-<title>添加新角色</title>
+<title>{{msg}}</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 {% end %}
@@ -9,21 +9,28 @@
     <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
         {% autoescape None %}
         <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>{{ form.name.label }}</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>{{form.name.label}}</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                {{ form.name }}
+                {{form.name(value=data.name)}}
             </div>
         </div>
         <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-3">{{ form.description.label }}</label>
+            <label class="form-label col-xs-4 col-sm-3">{{form.handler.label}}</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                {{ form.description }}
+                {{form.handler(value=data.handler)}}
             </div>
         </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">{{form.description.label}}</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                {{form.description(value=data.description)}}
+            </div>
+        </div>
+        {{form.id(value=data.id)}}
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
                 {% module xsrf_form_html() %}
-                {{ form.submit }}
+                {{form.submit}}
             </div>
         </div>
     </form>
@@ -41,8 +48,8 @@
             postData[this.name] = this.value
         });
         $.ajax({
-            "url":"/passport/permissions/group/add",
-            "type":"post",
+            "url": "/passport/permissions/edit/{{data.id}}",
+            "type": "post",
             data: JSON.stringify(postData),
             'headers': {
                 'X-XSRFTOKEN': get_cookie("_xsrf")

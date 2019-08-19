@@ -6,4 +6,5 @@ from libs.dataBase.db import Base
 from .passport import (usersModules, rolesModules, localOAuthModules, foreignOauthModules)
 from .relationship import relationTableModules
 from .permission import permissionModules
-from .article import productModules
+from .product import productModules
+from .product import productSkuModules

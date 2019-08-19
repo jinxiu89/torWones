@@ -6,6 +6,7 @@ import wtforms_json
 from handlers.base import BaseHandler
 from libs.captcha.capthca import auth_captcha
 from libs.passport.auth import sign_in, sign_up
+from libs.common import show
 from forms.passport import (login, signup)
 from tornado.web import authenticated
 from config import setting
@@ -46,13 +47,12 @@ class LoginHandler(BaseHandler):
         if form.validate():
             result = sign_in(self, data)
             if result['status'] is False:
-                return self.write({"status": False, "message": result['msg']})
+                return self.write(show(False, result['message'], ''))
             else:
-                return self.write(
-                    {"status": True, "message": result['msg'], "url": self.get_argument('next', '/admin/index')})
+                return self.write(show(True, result['message'], self.get_argument('next', '/admin/index')))
         else:
             for key in form.errors:
-                return self.write({"status": False, "message": str(form.errors[key])})
+                return self.write(show(False, str(form.errors[key]), ''))
 
 
 class SignUpHandler(BaseHandler):
@@ -72,18 +72,19 @@ class SignUpHandler(BaseHandler):
         if form.validate():
             result = sign_up(self, data)
             if result['status'] is False:
-                return self.write({"status": False, "message": "auth 注册程序有问题", "url": self.request.url})
+                return self.write(show(False, result['message'], ''))
             else:
-                return self.write({"status": True, "message": result['msg'], "url": "/passport/account/login"})
+                return self.write(show(True, result['message'], "/passport/account/login"))
         else:
             for key in form.errors:
-                return self.write({"status": False, "message": str(form.errors[key])})
+                return self.write(show(False, str(form.errors[key]), ''))
 
 
 class SignOutHandler(BaseHandler):
     def data_received(self, chunk):
         pass
 
+    @authenticated
     def get(self, *args, **kwargs):
         self.session.delete('user_name')
         self.redirect(setting['login_url'])

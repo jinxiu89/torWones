@@ -421,31 +421,31 @@ h4 {
 
 /*==============以下是业务相关的样式====================*/
 /*权限*/
-.Hui-admin-permission-list {
+.permission-list {
 	border: solid 1px #eee;
 }
-.Hui-admin-permission-list > dt {
+.permission-list > dt {
 	background-color: #efefef;
 	padding: 5px 10px;
 }
-.Hui-admin-permission-list > dd {
+.permission-list > dd {
 	padding: 10px;
 	padding-left: 30px
 }
-.Hui-admin-permission-list > dd > dl {
+.permission-list > dd > dl {
 	border-bottom: solid 1px #eee;
 	padding: 5px 0;
 }
-.Hui-admin-permission-list > dd > dl > dt {
+.permission-list > dd > dl > dt {
 	display: inline-block;
 	float: left;
 	white-space: nowrap;
 	width: 100px;
 }
-.Hui-admin-permission-list > dd > dl > dd {
+.permission-list > dd > dl > dd {
 	margin-left: 100px;
 }
-.Hui-admin-permission-list > dd > dl > dd > label{
+.permission-list > dd > dl > dd > label{
 	padding-right: 10px;
 }
 

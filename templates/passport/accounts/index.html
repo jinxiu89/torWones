@@ -1,0 +1,111 @@
+{% extends ../../base/parent.html%}
+{% block header %}
+<title>用户列表</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+{% end %}
+{% block nav %}
+<nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+    首页
+    <span class="c-gray en">/</span>
+    管理员管理
+    <span class="c-gray en">/</span>
+    用户列表
+</nav>
+{% end %}
+{% block body %}
+<article class="Hui-admin-content clearfix">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="clearfix">
+                <span class="f-l">
+                    <a class="btn btn-primary radius" href="javascript:void(0);"
+                       onclick="admin_role_add('添加用户','/passport/permissions/add_group')"><i
+                            class="Hui-iconfont">&#xe600;</i> 添加用户</a>
+                </span>
+                <span class="f-r">共有数据：<strong>{{count}}</strong> 条</span>
+            </div>
+            <div class="mt-20 clearfix">
+                <table class="table table-border table-bordered table-hover table-bg">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="7">用户列表</th>
+                    </tr>
+                    <tr class="text-c">
+                        <th width="40">ID</th>
+                        <th width="100">name</th>
+                        <th width="100">昵称</th>
+                        <th class="text-l" width="150">Email</th>
+                        <th width="130">操作</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if data %}
+                    {% for i in data %}
+                    <tr class="text-c">
+                        <td>{{ i.id }}</td>
+                        <td class="text-l">{{ i.name }}</td>
+                        <td class="text-l">{{ i.nickname }}</td>
+                        <td class="text-l">{{ i.email }}</td>
+                        <td class="f-14">
+                            <a title="编辑用户" class="btn btn-primary"
+                               onclick="admin_user_edit('编辑用户','/passport/account/user/edit/{{i.id}}')"
+                               style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a title="设置角色" class="btn btn-warning"
+                               onclick="admin_user_edit('设置角色','/passport/account/user/set/role/{{i.id}}')"
+                               style="text-decoration:none"><i class="Hui-iconfont">&#xe725;</i></a>
+                            <a title="设置为超级用户" class="btn btn-danger"
+                               onclick="set_admin('/passport/account/user/set/admin/{{i.id}}')"
+                               style="text-decoration:none"><i class="Hui-iconfont">&#xe62d;</i></a>
+                        </td>
+                        <td></td>
+                    </tr>
+                    {% end %}
+                    {% else %}
+                    <tr>没有数据</tr>
+                    {% end %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</article>
+{% end %}
+{% block javascript %}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/libs/datatables/1.10.15/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/libs/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/static/plugins/hui/business/js/main.js"></script>
+<script type="text/javascript" src="/static/libs/js/commons.js"></script>
+<!--/请在上方写此页面业务相关的脚本-->
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#menu-admin dd").css("display", "block");
+        $("#menu-admin #user").addClass("current");
+    });
+    function set_admin(url) {
+        $.ajax({
+            "url": url,
+            "type": "post",
+            data: "",
+            'headers': {
+                'X-XSRFTOKEN': get_cookie("_xsrf")
+            },
+            'success': function (result) {
+                if (result.status === true) {
+                    layer.msg(result.message, {icon: 1, time: 1000});
+                    setTimeout(function () {
+                        window.close();
+                        window.parent.location = result.url;
+                    }, 1000)
+                } else {
+                    layer.msg(result.message, {icon: 5, time: 2000})
+                }
+            }
+        });
+    }
+</script>
+{% end %}
+{% end %}

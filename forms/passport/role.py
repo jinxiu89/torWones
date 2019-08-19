@@ -77,7 +77,7 @@ class RoleEditForm(Form):
 
     description = wtforms.StringField(
         label="角色描述",
-        validators=[DataRequired("请输入描述"), Length(12, 64, message="长度必须在12-64个字符之间")],
+        validators=[DataRequired("请输入描述"), Length(4, 32, message="角色描述长度必须在4-32个字符之间")],
         description="角色描述",
         render_kw={
             "id": "description",

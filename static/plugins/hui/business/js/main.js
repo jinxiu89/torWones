@@ -484,7 +484,29 @@ function admin_role_edit(title, url) {
         type: 2,
         title: title,
         content: url,
-        area: ['800px', '280px']
+        area: ['800px', '320px']
+    });
+}
+
+/*管理员-编辑用户*/
+function admin_user_edit(title, url) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url,
+        area: ['800px', '640px']
+    });
+}
+
+/*
+设置权限
+ */
+function admin_set_permission(title, url) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url,
+        area: ['800px', '640px']
     });
 }
 

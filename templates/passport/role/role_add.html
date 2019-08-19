@@ -30,9 +30,6 @@
 </article>
 {% end %}
 {% block javascript %}
-<!--<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>-->
-<!--<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>-->
-<!--<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>-->
 <script type="text/javascript" src="/static/libs/js/commons.js"></script>
 <!--外部引入JS插件-->
 {% block js %}
@@ -44,8 +41,8 @@
             postData[this.name] = this.value
         });
         $.ajax({
-            "url":"/passport/add_role",
-            "type":"post",
+            "url": "/passport/role/add",
+            "type": "post",
             data: JSON.stringify(postData),
             'headers': {
                 'X-XSRFTOKEN': get_cookie("_xsrf")

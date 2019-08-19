@@ -21,15 +21,15 @@ class User(Base):
     """
     __tablename__ = "tb_users"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    gid = Column(Integer)
+    is_admin = Column(Integer, default=0)
     uuid = Column(String(36), unique=True, nullable=False, default=lambda: str(uuid4()))
     name = Column(String(64), nullable=False)
     nickname = Column(String(64))
     create_time = Column(DateTime, default=datetime.now())
-    phone = Column(String(64))
+    # phone = Column(String(64))
     email = Column(String(64))
     mobile = Column(String(11))
-    num = Column(String(11), unique=True)
+    # num = Column(String(11), unique=True)
     qq = Column(String(13))
     _locked = Column(Boolean, default=False, nullable=False)
     _is_delete = Column(Boolean, default=False, nullable=False)
@@ -43,7 +43,10 @@ class User(Base):
         查询所有的数据，返回表数据
         :return: 列表
         """
-        return dbSession.query(cls).all()
+        query = dbSession.query(cls)
+        data = query.all()
+        count = query.count()
+        return data, count
 
     @classmethod
     def by_id(cls, id):

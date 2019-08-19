@@ -4,6 +4,7 @@
 # create by kevin on {18-12-29}.
 import os
 from datetime import datetime
+from libs.flash import get_flashed_messages
 
 BASE_DIR = os.path.dirname(__file__)
 option = {
@@ -20,7 +21,7 @@ setting = {
     "cookie_secret": "db7ef65f-3bb0-4d19-9966-d07fafb3cd8a",
     "login_url": "/passport/account/login",
     "ui_methods": {
-        "get_flashed_message": ""
+        "get_flashed_messages": get_flashed_messages,
     },
     "pycket": {
         "engine": "redis",

@@ -115,6 +115,16 @@
 <script type="text/javascript" src="/static/libs/layer/3.1.1/layer.js"></script>
 <script type="text/javascript" src="/static/plugins/hui/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="/static/plugins/hui/h-ui.admin.pro/js/h-ui.admin.pro.min.js"></script>
+{% for message,url in get_flashed_messages(category_filter=["error"]) %}
+<script type="text/javascript">
+    var msg = "{{ message }}";
+    if (msg) {
+        layer.msg(msg, {icon: 5, time: 2000}, function () {
+            window.parent.location.href = url
+        })
+    }
+</script>
+{% end %}
 {% block javascript %}
 <!--外部引入JS插件-->
 {% block js %}

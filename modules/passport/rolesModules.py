@@ -3,7 +3,7 @@
 # author:Jinxiu89@163.com
 # create by kevin on {2019/3/28}.
 from sqlalchemy import (Column, Integer, String)
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from libs.dataBase.db import Base, dbSession
 from modules.relationship.relationTableModules import UserRole, PermissionRole
 
@@ -17,7 +17,7 @@ class Role(Base):
     # 1角色和用户属于多对多的关系；
     users = relationship("User", secondary=UserRole.__tablename__)
     # 2、权限和角色是多对多的关系
-    permission = relationship("Permission", secondary=PermissionRole.__tablename__)
+    permission = relationship("Permission", secondary=PermissionRole.__tablename__, backref=backref("Role"))
 
     @classmethod
     def all(cls):

@@ -42,7 +42,7 @@
             postData[this.name] = this.value
         });
         $.ajax({
-            "url":"/passport/permissions/edit_group/{{data.id}}",
+            "url":"/passport/permissions/group/edit/{{data.id}}",
             "type":"post",
             data: JSON.stringify(postData),
             'headers': {

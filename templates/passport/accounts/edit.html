@@ -1,25 +1,44 @@
 {%extends ../../base/add.html%}
 {% block header %}
-<title>添加新角色</title>
+<title>编辑用户</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 {% end %}
 {% block article %}
 <article class="clearfix pd-20">
-    <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-add">
         {% autoescape None %}
         <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>{{ form.name.label }}</label>
-            <div class="form-controls col-xs-8 col-sm-9">
-                {{ form.name }}
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>{{form.name.label}}：</label>
+            <div class="form-controls col-xs-8 col-sm-4">
+                {{form.name(value=data.name)}}
             </div>
         </div>
         <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-3">{{ form.description.label }}</label>
-            <div class="form-controls col-xs-8 col-sm-9">
-                {{ form.description }}
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>{{form.nickname.label}}：</label>
+            <div class="form-controls col-xs-8 col-sm-4">
+                {{form.nickname(value=data.nickname)}}
             </div>
         </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>{{form.email.label}}：</label>
+            <div class="form-controls col-xs-8 col-sm-4">
+                {{form.email(value=data.email)}}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>{{form.mobile.label}}：</label>
+            <div class="form-controls col-xs-8 col-sm-4">
+                {{form.mobile(value=data.mobile)}}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>{{form.qq.label}}：</label>
+            <div class="form-controls col-xs-8 col-sm-4">
+                {{form.qq(value=data.qq)}}
+            </div>
+        </div>
+        <input type="hidden" value="{{data.id}}" name="id">
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
                 {% module xsrf_form_html() %}
@@ -41,8 +60,8 @@
             postData[this.name] = this.value
         });
         $.ajax({
-            "url":"/passport/permissions/group/add",
-            "type":"post",
+            "url": "/passport/account/user/edit/{{data.id}}",
+            "type": "post",
             data: JSON.stringify(postData),
             'headers': {
                 'X-XSRFTOKEN': get_cookie("_xsrf")
@@ -64,4 +83,3 @@
 <!--JS业务-->
 {% end %}
 {% end %}
-

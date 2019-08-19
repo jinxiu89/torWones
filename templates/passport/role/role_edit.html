@@ -45,7 +45,7 @@
             postData[this.name] = this.value
         });
         $.ajax({
-            "url": "/passport/edit_role/{{ role.id }}",
+            "url": "/passport/role/edit/{{ role.id }}",
             "type": "post",
             data: JSON.stringify(postData),
             'headers': {

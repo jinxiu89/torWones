@@ -20,12 +20,11 @@
     <div class="panel">
         <div class="panel-body">
             <div class="clearfix">
-						<span class="f-l">
-							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
-                                    class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-							<a class="btn btn-primary radius" href="javascript:void(0);"
-                               onclick="admin_role_add('添加权限组','/passport/permissions/add_group')"><i class="Hui-iconfont">&#xe600;</i> 添加权限组</a>
-						</span>
+                <span class="f-l">
+                    <a class="btn btn-primary radius" href="javascript:void(0);"
+                       onclick="admin_role_add('添加权限组','/passport/permissions/group/add')"><i
+                            class="Hui-iconfont">&#xe600;</i> 添加权限组</a>
+                </span>
                 <span class="f-r">共有数据：<strong>{{count}}</strong> 条</span>
             </div>
             <div class="mt-20 clearfix">
@@ -35,27 +34,29 @@
                         <th scope="col" colspan="6">权限组</th>
                     </tr>
                     <tr class="text-c">
-                        <th width="25"><input type="checkbox" value="" name=""></th>
                         <th width="40">ID</th>
                         <th width="100">组名</th>
                         <th class="text-l">描述</th>
-                        <th width="130">操作</th>
+                        <th width="85">操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% if data %}
                     {% for i in data %}
                     <tr class="text-c">
-                        <td><input type="checkbox" value="" name=""></td>
                         <td>{{ i.id }}</td>
                         <td>{{ i.name }}</td>
+
                         <td class="text-l">{{ i.description }}</td>
                         <td class="f-14">
-                            <a title="编辑权限组" class="btn btn-primary" onclick="admin_role_edit('编辑组','/passport/permissions/edit_group/{{i.id}}')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-                            <a title="加权限到组" onclick="admin_role_edit('加权限到组','/passport/edit_role/{{i.id}}')" class="btn btn-success"
-                                style="text-decoration:none"><i class="Hui-iconfont">&#xe725;</i></a>
-                            <a title="删除"  onclick="admin_role_del(this,'1')" class=" btn btn-danger"
-                                style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                            <a title="编辑权限组" class="btn btn-primary"
+                               onclick="admin_role_edit('编辑组','/passport/permissions/group/edit/{{i.id}}')"
+                               style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a title="加权限到组"
+                               onclick="admin_role_edit('加权限到组','/passport/permissions/add/{{i.id}}')"
+                               class="btn btn-success"
+                               style="text-decoration:none"><i class="Hui-iconfont">&#xe604;</i></a>
+                        </td>
                     </tr>
                     {% end %}
                     {% else %}

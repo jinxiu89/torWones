@@ -1,0 +1,100 @@
+{%extends ../../base/add.html%}
+{% block header %}
+<title>设置角色</title>
+{% end %}
+{% block article %}
+<article class="clearfix pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2">设置角色：</label>
+            <div class="form-controls col-xs-8 col-sm-10">
+                <dl class="permission-list">
+                    <dt>
+                        <label>
+                            <input type="checkbox" value="" id="user-Character-0">
+                            角色列表
+                        </label>
+                    </dt>
+                    <dd class="permission-list2">
+                        {% for x in data%}
+                        <label>
+                            <input type="checkbox" value="{{x.id}}" {% if x.id in rlist %} checked="checked" {% end %} name="id">
+                            {{x.name}}
+                        </label>
+                        {% end %}
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <input id="role_id" type="hidden" value="{{user.id}}" name="user_id">
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <button type="button" class="btn btn-success radius button"><i
+                        class="icon-ok"></i> 确定
+                </button>
+            </div>
+        </div>
+    </form>
+</article>
+{% end %}
+{% block javascript %}
+<script type="text/javascript" src="/static/libs/js/commons.js"></script>
+<!--外部引入JS插件-->
+{% block js %}
+<script type="text/javascript">
+    $(function () {
+        $(".permission-list dt input:checkbox").click(function () {
+            $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
+        });
+        $(".permission-list2 input:checkbox").click(function () {
+            var l = $(this).parent().parent().find("input:checked").length;
+            var l2 = $(this).parents(".permission-list").find(".permission-list2").find("input:checked").length;
+            if ($(this).prop("checked")) {
+                $(this).closest("dl").find("dt input:checkbox").prop("checked", true);
+                $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", true);
+            } else {
+                if (l === 0) {
+                    $(this).closest("dl").find("dt input:checkbox").prop("checked", false);
+                }
+                if (l2 === 0) {
+                    $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", false);
+                }
+            }
+        });
+
+    });
+    $(".button").click(function () {
+        var postData = {};
+        var permission = $("input[name='id']:checked").serializeArray();
+        $.each(permission, function () {
+            postData[this.value] = this.name
+        });
+        var role = $("#role_id").serializeArray();
+        $.each(role, function () {
+            postData[this.name] = this.value
+        });
+        $.ajax({
+            "url": "/passport/account/user/set/role/{{user.id}}",
+            "type": "post",
+            data: JSON.stringify(postData),
+            'headers': {
+                'X-XSRFTOKEN': get_cookie("_xsrf")
+            },
+            'success': function (result) {
+                if (result.status === true) {
+                    layer.msg(result.message, {icon: 1, time: 1000});
+                    setTimeout(function () {
+                        window.close();
+                        window.parent.location = result.url;
+                    }, 1000)
+                } else {
+                    layer.msg(result.message, {icon: 5, time: 2000})
+                }
+            }
+        });
+    });
+</script>
+<!--JS业务-->
+{% end %}
+{% end %}
+
