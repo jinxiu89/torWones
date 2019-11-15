@@ -94,7 +94,7 @@ class SetPermission(BaseHandler):
 
     @authenticated
     def get(self, role_id):
-        data, count = PermissionGroup.all()
+        data, count = PermissionGroup. all()
         role = RoleModel.by_id(role_id)
         permissions = role.permission
         plist = list()
