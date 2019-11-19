@@ -2,6 +2,7 @@
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
 # create by thomas on 18-12-31.
+from tornado.web import url
 from handlers.admin.dashboard import (
     dashboardHandlers,
 )
@@ -10,7 +11,7 @@ from handlers.admin.system import (
 )
 
 adminUrls = [
-    (r'/admin/index', dashboardHandlers.IndexHandler),
-    (r'/admin/index/', dashboardHandlers.IndexHandler),
-    (r'/admin/system', settingsHandlers.IndexHandler),
+    url(r'/admin/index', dashboardHandlers.IndexHandler, name="dashboard"),
+    url(r'/admin/index/', dashboardHandlers.IndexHandler, name="dashboard"),
+    url(r'/admin/system', settingsHandlers.IndexHandler, name="settings"),
 ]

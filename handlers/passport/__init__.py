@@ -2,6 +2,7 @@
 # _*_coding:utf-8_*_
 # author:Jinxiu89@163.com
 # create by kevin on {18-12-29}.
+from tornado.web import url
 from handlers.passport.accounts import (
     accountHandlers,
     authHandlers,
@@ -13,11 +14,11 @@ from handlers.passport import (
 
 passportUrl = [
     # 用户操作相关
-    (r'/passport/account\.html', accountHandlers.IndexHandler),
-    (r'/passport/account/user/add/', accountHandlers.AddHandler),
-    (r'/passport/account/user/edit/(?P<user_id>[0-9]+)', accountHandlers.EditHandler),
-    (r'/passport/account/user/set/role/(?P<user_id>[0-9]+)', accountHandlers.SetRoleHandler),
-    (r'/passport/account/user/set/admin/(?P<user_id>[0-9]+)', accountHandlers.SetAdminHandler),
+    url(r'/passport/account\.html', accountHandlers.IndexHandler, name="account"),
+    url(r'/passport/account/user/add/', accountHandlers.AddHandler, name="add_account"),
+    url(r'/passport/account/user/edit/(?P<user_id>[0-9]+)', accountHandlers.EditHandler, name="edit_account"),
+    url(r'/passport/account/user/set/role/(?P<user_id>[0-9]+)', accountHandlers.SetRoleHandler, name="set_role"),
+    url(r'/passport/account/user/set/admin/(?P<user_id>[0-9]+)', accountHandlers.SetAdminHandler, name="set_admin"),
 
     # 认证相关
     (r'/passport/account/auth', authHandlers.AuthHandler),
