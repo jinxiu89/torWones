@@ -23,6 +23,8 @@ class Role(BaseHandler):
     @authenticated
     # @permission
     def get(self, *args, **kwargs):
+        # print("hello")
+        # exit()
         data, count = RoleModel.all()
         self.render('passport/role/role_list.html', count=count, data=data)
 
@@ -32,7 +34,7 @@ class RoleAdd(BaseHandler):
         pass
 
     # @authenticated
-    # @admin_permission
+    # @admin_permissionl
     def get(self):
         kwargs = {
             "msg": "新增角色",
@@ -95,6 +97,7 @@ class SetPermission(BaseHandler):
     @authenticated
     def get(self, role_id):
         data, count = PermissionGroup. all()
+        print(data)
         role = RoleModel.by_id(role_id)
         permissions = role.permission
         plist = list()
